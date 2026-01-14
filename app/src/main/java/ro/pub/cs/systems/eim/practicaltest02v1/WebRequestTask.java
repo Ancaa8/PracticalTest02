@@ -57,6 +57,7 @@ public class WebRequestTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         Log.d("WEB_RESPONSE", result);
 
+        //3b
         try {
             String thirdSuggestion=
                     new JSONArray(result)
@@ -66,9 +67,10 @@ public class WebRequestTask extends AsyncTask<String, Void, String> {
 
             Log.d("AUTOCOMPLETE_3", thirdSuggestion);
 
+            //3c
             Intent intent = new Intent("ro.pub.cs.systems.eim.practicaltest02v1.AUTOCOMPLETE");
             intent.setPackage(context.getPackageName());
-            intent.putExtra("suggestion", thirdSuggestion);
+            intent.putExtra("output", thirdSuggestion);
             context.sendBroadcast(intent);
 
         } catch (JSONException e) {

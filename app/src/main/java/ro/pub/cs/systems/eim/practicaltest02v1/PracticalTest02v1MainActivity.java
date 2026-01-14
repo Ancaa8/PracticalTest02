@@ -23,12 +23,12 @@ public class PracticalTest02v1MainActivity extends AppCompatActivity {
     Button button;
     TextView textView;
 
-    private BroadcastReceiver autocompleteReceiver = new BroadcastReceiver() {
+    private BroadcastReceiver Receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String suggestion = intent.getStringExtra("suggestion");
-            if (suggestion != null) {
-                textView.setText(suggestion);
+            String output = intent.getStringExtra("output");
+            if (output != null) {
+                textView.setText(output);
             }
         }
     };
@@ -60,16 +60,16 @@ public class PracticalTest02v1MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter("ro.pub.cs.systems.eim.practicaltest02v1.AUTOCOMPLETE");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(autocompleteReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+            registerReceiver(Receiver, filter, Context.RECEIVER_NOT_EXPORTED);
         } else {
-            registerReceiver(autocompleteReceiver, filter);
+            registerReceiver(Receiver, filter);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(autocompleteReceiver);
+        unregisterReceiver(Receiver);
     }
 
 
