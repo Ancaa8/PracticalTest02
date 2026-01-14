@@ -1,5 +1,7 @@
 package ro.pub.cs.systems.eim.practicaltest02v1;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -12,6 +14,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class WebRequestTask extends AsyncTask<String, Void, String> {
+
+    private Context context;
+
+    public WebRequestTask(Context context) {
+        this.context = context;
+    }
+
 
     @Override
     protected String doInBackground(String... params) {
@@ -56,6 +65,11 @@ public class WebRequestTask extends AsyncTask<String, Void, String> {
 
 
             Log.d("AUTOCOMPLETE_3", thirdSuggestion);
+
+            Intent intent = new Intent("ro.pub.cs.systems.eim.practicaltest02v1.AUTOCOMPLETE");
+            intent.setPackage(context.getPackageName());
+            intent.putExtra("suggestion", thirdSuggestion);
+            context.sendBroadcast(intent);
 
         } catch (JSONException e) {
             e.printStackTrace();
