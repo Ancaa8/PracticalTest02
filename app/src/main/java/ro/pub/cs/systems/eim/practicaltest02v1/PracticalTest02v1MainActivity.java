@@ -23,6 +23,8 @@ public class PracticalTest02v1MainActivity extends AppCompatActivity {
     Button button;
     TextView textView;
 
+    Button button2;
+
     private BroadcastReceiver Receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -44,11 +46,21 @@ public class PracticalTest02v1MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.edittext1);
         button = findViewById(R.id.button1);
         textView = findViewById(R.id.textview1);
+        button2 = findViewById(R.id.button2);
 
         button.setOnClickListener(view -> {
             String prefix = editText.getText().toString();
             new WebRequestTask(this).execute(prefix);
         });
+
+        button2.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    PracticalTest02v1MainActivity.this,
+                    MapActivity.class
+            );
+            startActivity(intent);
+        });
+
 
 
     }
